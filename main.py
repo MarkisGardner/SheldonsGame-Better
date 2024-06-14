@@ -34,90 +34,27 @@ def setup_wins():
 
 def did_you_win(your_choice, computer_choice):
     win_info, abbreviations = setup_wins()
-    if your_choice == "R":
-        if computer_choice == 3:
-            print("Your Rock crushes the computer's scissors!  You win!")
+    print("win_info is", win_info)
+    print("abbreviations is ", abbreviations)
+    print("Your choice is ", your_choice)
+    print("Computer_choice is ", computer_choice)
+    if your_choice == abbreviations[2 * computer_choice - 2]:
+        print("It is a tie!")
+        return "T"
+    for i in range(len(win_info)):
+        if your_choice == win_info[i] and abbreviations[2 * computer_choice - 2] == win_info[i + 1]:
+            print("Found winner")
+            print("Your ", abbreviations[abbreviations.index(your_choice) + 1], win_info[i+2],
+                  abbreviations[2 * computer_choice - 2 + 1])
             return "W"
-        elif computer_choice == 4:
-            print("Your Rock crushes the computer's lizard!  You win! ")
-            return "W"
-        elif computer_choice == 5:
-            print("The computer's Spock vaporizes your rock!  You lose!")
+        elif your_choice == win_info[i] and abbreviations[2 * computer_choice - 2] == win_info[i - 1]:
+            print("The computer's ", abbreviations[2 * computer_choice - 2 + 1], win_info[i + 1],
+                  abbreviations[abbreviations.index(your_choice) + 1])
+            # note: I do not need to worry about win_info[i-1] even if i = 0
+            print("Found loser")
             return "L"
-        elif computer_choice == 2:
-            print("The computer's Paper covers your rock!  You lose!")
-            return "L"
-        else:
-            print("It is a tie - you both chose the same!")
-            return "T"
-    elif your_choice == "P":
-        if computer_choice == 3:
-            print("Your Paper gets cut by the computer's scissors!  You lose!")
-            return "L"
-        elif computer_choice == 4:
-            print("Your Paper gets eaten by the computer's lizard!  You lose! ")
-            return "L"
-        elif computer_choice == 5:
-            print("Your paper disproves Spock!  You win!")
-            return "W"
-        elif computer_choice == 1:
-            print("Your rock covers the computer's rock!  You win!")
-            return "W"
-        else:
-            print("It is a tie - you both chose the same!")
-            return "T"
-    elif your_choice == "S":
-        if computer_choice == 1:
-            print("The computer's rock crushes your scissors!  You lose!")
-            return "L"
-        elif computer_choice == 4:
-            print("Your scissor decapitates the computer's lizard!  You win! ")
-            return "W"
-        elif computer_choice == 5:
-            print("The computer's Spock smashes your scissors!  You lose!")
-            return "L"
-        elif computer_choice == 2:
-            print("Your scissors cut the computer's Paper!  You win!")
-            return "W"
-        else:
-            print("It is a tie - you both chose the same!")
-            return "T"
-    elif your_choice == "L":
-        if computer_choice == 3:
-            print("The computer's scissors decapitates your Lizard!   You lose!")
-            return "L"
-        elif computer_choice == 1:
-            print("The computer's rock crushes your Lizard!  You lose! ")
-            return "L"
-        elif computer_choice == 5:
-            print("Your Lizard poisons the computer's Spock!  You win!")
-            return "W"
-        elif computer_choice == 2:
-            print("Your Lizard eats the computer's paper!  You win!")
-            return "W"
-        else:
-            print("It is a tie - you both chose the same!")
-            return "T"
-    elif your_choice == "Sp":
-        if computer_choice == 1:
-            print("Your Spock vaporizes the computer's rock!  You win!")
-            return "W"
-        elif computer_choice == 4:
-            print("The computer's lizard poisoned your Spock!  You lose! ")
-            return "L"
-        elif computer_choice == 3:
-            print("Your Spock smashes the computer's rock!  You win!")
-            return "W"
-        elif computer_choice == 2:
-            print("The computer's Paper disproves your Spock!  You lose!")
-            return "L"
-        else:
-            print("It is a tie - you both chose the same!")
-            return "T"
-    else:
-        print("You can't follow instructions - you lose!")
-        instructions()
-        return "L"
+    print("No way I should get here - ERROR")
+    return "E"
 
 
 def play_game(times):
